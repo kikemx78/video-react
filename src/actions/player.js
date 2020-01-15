@@ -4,6 +4,14 @@ export const OPERATE = 'video-react/OPERATE';
 export const FULLSCREEN_CHANGE = 'video-react/FULLSCREEN_CHANGE';
 export const PLAYER_ACTIVATE = 'video-react/PLAYER_ACTIVATE';
 export const USER_ACTIVATE = 'video-react/USER_ACTIVATE';
+export const MODAL_TOGGLE = 'video-react/MODAL_TOGGLE';
+
+export function toggleModal(isModalOpen) {
+  return {
+    type: MODAL_TOGGLE,
+    isModalOpen
+  };
+}
 
 export function handleFullscreenChange(isFullscreen) {
   return {

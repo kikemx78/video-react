@@ -11,6 +11,7 @@ import Video from './Video';
 import Bezel from './Bezel';
 import Shortcut from './Shortcut';
 import ControlBar from './control-bar/ControlBar';
+import Modal from './Modal';
 
 import * as browser from '../utils/browser';
 import { focusNode } from '../utils/dom';
@@ -93,6 +94,7 @@ export default class Player extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleModalToggle = this.handleModalToggle.bind(this);
   }
 
   componentDidMount() {
@@ -128,6 +130,7 @@ export default class Player extends Component {
       <Bezel key="bezel" order={3.0} />,
       <BigPlayButton key="big-play-button" order={4.0} />,
       <ControlBar key="control-bar" order={5.0} />,
+      <Modal key="modal" order={6} />,
       <Shortcut key="shortcut" order={99.0} />
     ];
   }
@@ -275,6 +278,7 @@ export default class Player extends Component {
   // pause the video
   pause() {
     this.video.pause();
+    this.handleModalToggle();
   }
 
   // Change the video source and re-load the video:
@@ -336,6 +340,12 @@ export default class Player extends Component {
 
   handleKeyDown() {
     this.startControlsTimer();
+  }
+
+  handleModalToggle() {
+    const { player } = this.manager.getState();
+    const { isModalOpen } = player;
+    this.actions.toggleModal(!isModalOpen);
   }
 
   startControlsTimer() {

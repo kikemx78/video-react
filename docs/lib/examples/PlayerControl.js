@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import { PrismCode } from 'react-prism';
-import { Player, ControlBar } from 'video-react';
+import { Player, ControlBar, FullscreenToggle } from 'video-react';
 import { Button } from 'reactstrap';
+
+const ModalText = ({ modalText }) => {
+  return <div className="video-react-modal-text">{modalText}</div>;
+};
+
+const ModalButton = ({ handleClick, buttonText }) => {
+  return (
+    <div
+      onClick={handleClick}
+      style={{ cursor: 'pointer', margin: '35px', position: 'relative' }}
+      className="video-react-modal-button"
+    >
+      <span
+        style={{ padding: '10px', border: 'solid 1px #fff' }}
+        className="video-react-modal-button-text"
+      >
+        {buttonText}
+      </span>
+    </div>
+  );
+};
 
 const sources = {
   sintelTrailer: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -26,6 +47,8 @@ export default class PlayerControlExample extends Component {
     this.changePlaybackRateRate = this.changePlaybackRateRate.bind(this);
     this.changeVolume = this.changeVolume.bind(this);
     this.setMuted = this.setMuted.bind(this);
+
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
@@ -94,7 +117,20 @@ export default class PlayerControlExample extends Component {
     };
   }
 
+  toggleModal() {
+    this.player.handleModalToggle();
+  }
+
   render() {
+    const modalChildren = [
+      <ModalText key="modal-text" modalText="Close modal by clicking button" />,
+      <ModalButton
+        key="modal-button"
+        buttonText="Close"
+        handleClick={this.toggleModal}
+      />
+    ];
+
     return (
       <div>
         <Player
@@ -102,6 +138,8 @@ export default class PlayerControlExample extends Component {
             this.player = player;
           }}
           autoPlay
+          hasModal={this.state.player && this.state.player.isModalOpen}
+          modalChildren={modalChildren}
         >
           <source src={this.state.source} />
           <ControlBar autoHide={false} />
@@ -168,6 +206,9 @@ export default class PlayerControlExample extends Component {
           </Button>
           <Button onClick={this.changeSource('test')} className="mr-3">
             Test movie
+          </Button>
+          <Button onClick={this.toggleModal} className="mr-3">
+            Toggle Modal
           </Button>
         </div>
         <div>State</div>

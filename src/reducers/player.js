@@ -29,7 +29,8 @@ import {
 import {
   FULLSCREEN_CHANGE,
   PLAYER_ACTIVATE,
-  USER_ACTIVATE
+  USER_ACTIVATE,
+  MODAL_TOGGLE
 } from '../actions/player';
 
 const initialState = {
@@ -54,7 +55,8 @@ const initialState = {
   userActivity: true,
   isActive: false,
   isFullscreen: false,
-  activeTextTrack: null
+  activeTextTrack: null,
+  isModalOpen: false
 };
 
 export default function player(state = initialState, action) {
@@ -68,6 +70,12 @@ export default function player(state = initialState, action) {
       return {
         ...state,
         isActive: action.activity
+      };
+    case MODAL_TOGGLE:
+      console.log(action);
+      return {
+        ...state,
+        isModalOpen: action.isModalOpen
       };
     case FULLSCREEN_CHANGE:
       return {

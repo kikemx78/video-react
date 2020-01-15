@@ -535,6 +535,13 @@ handleStateChange(state, prevState) {
           <tr>
             <td>&nbsp;</td>
             <td>
+              <code>isModalOpen</code>
+            </td>
+            <td>Returns whether a modal overlying the player is open.</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>
               <code>videoId</code>
             </td>
             <td>Set the id of the video element.</td>
