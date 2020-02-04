@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PrismCode } from 'react-prism';
-import { Player, ControlBar, FullscreenToggle } from 'video-react';
+import { Player, ControlBar } from 'video-react';
 import { Button } from 'reactstrap';
 
 const ModalText = ({ modalText }) => {
