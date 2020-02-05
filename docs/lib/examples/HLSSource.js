@@ -18,6 +18,17 @@ export default class HLSSource extends Component {
       this.hls.attachMedia(video);
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
         video.play();
+        this.props.actions.setHLS(this.hls);
+
+        setTimeout(() => {
+          console.log('fire...');
+          this.hls.currentLevel = 0;
+        }, 5000);
+
+        setTimeout(() => {
+          console.log('fire...2');
+          this.hls.currentLevel = 4;
+        }, 10000);
       });
     }
   }

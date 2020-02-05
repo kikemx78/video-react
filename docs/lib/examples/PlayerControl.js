@@ -138,6 +138,7 @@ export default class PlayerControlExample extends Component {
             this.player = player;
           }}
           autoPlay
+          hasBitRateControler
           hasModal={this.state.player && this.state.player.isModalOpen}
           modalChildren={modalChildren}
         >

@@ -24,7 +24,8 @@ import {
   LOADED_DATA,
   ACTIVATE_TEXT_TRACK,
   RESIZE,
-  ERROR
+  ERROR,
+  SET_HLS
 } from '../actions/video';
 import {
   FULLSCREEN_CHANGE,
@@ -56,11 +57,18 @@ const initialState = {
   isActive: false,
   isFullscreen: false,
   activeTextTrack: null,
-  isModalOpen: false
+  isModalOpen: false,
+  hls: {}
 };
 
 export default function player(state = initialState, action) {
   switch (action.type) {
+    case SET_HLS:
+      console.log(action);
+      return {
+        ...state,
+        hls: action.hls
+      };
     case USER_ACTIVATE:
       return {
         ...state,
@@ -72,7 +80,6 @@ export default function player(state = initialState, action) {
         isActive: action.activity
       };
     case MODAL_TOGGLE:
-      console.log(action);
       return {
         ...state,
         isModalOpen: action.isModalOpen

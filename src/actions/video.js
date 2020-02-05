@@ -24,6 +24,14 @@ export const LOADED_DATA = 'video-react/LOADED_DATA';
 export const RESIZE = 'video-react/RESIZE';
 export const ERROR = 'video-react/ERROR';
 export const ACTIVATE_TEXT_TRACK = 'video-react/ACTIVATE_TEXT_TRACK';
+export const SET_HLS = 'video-react/SET_HLS';
+
+export function setHLS(hls) {
+  return {
+    type: SET_HLS,
+    hls
+  };
+}
 
 export function handleLoadStart(videoProps) {
   return {
